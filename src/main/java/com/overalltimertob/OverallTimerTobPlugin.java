@@ -175,5 +175,6 @@ public class OverallTimerTobPlugin extends Plugin
 		startTime = -1;
 		startTick = -1;
 		raidCompleteTimeSnapshot = 0;
+		this.overlayManager.remove(overlay);
 	}
 }
