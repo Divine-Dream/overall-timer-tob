@@ -42,7 +42,7 @@ public class OverallTimerTobPlugin extends Plugin
 	@Override
 	protected void startUp() throws Exception
 	{
-		log.info("TOB Timer started!");
+		log.debug("TOB Timer started!");
 		overlayManager.add(overlay);
 	}
 
@@ -50,6 +50,7 @@ public class OverallTimerTobPlugin extends Plugin
 	protected void shutDown() throws Exception
 	{
 		reset();
+		overlayManager.remove(overlay);
 	}
 
 	public OverallTimerTobConfig getConfig()
@@ -69,7 +70,7 @@ public class OverallTimerTobPlugin extends Plugin
 		NPC npc = event.getNpc();
 		if (npc.getName() != null && npc.getName().equalsIgnoreCase("The Maiden of Sugadinti"))
 		{
-			log.info("Maiden NPC spawned (ID: {})", npc.getId());
+			log.debug("Maiden NPC spawned (ID: {})", npc.getId());
 		}
 	}*/
 
@@ -85,7 +86,7 @@ public class OverallTimerTobPlugin extends Plugin
 
 		if (currentRegion == TOB_LOBBY_REGION_ID)
 		{
-			//log.info("tob lobby detected");
+			//log.debug("tob lobby detected");
 			reset();
 		}
 
@@ -96,7 +97,7 @@ public class OverallTimerTobPlugin extends Plugin
 			raidCompleteTimeSnapshot = 0;
 			startTime = System.currentTimeMillis();
 			startTick = client.getTickCount();
-			//log.info("TOB raid timer started — Maiden gate line crossed!");
+			//log.debug("TOB raid timer started — Maiden gate line crossed!");
 		}
 
 		if (raidComplete && raidCompleteTimeSnapshot == 0)
@@ -152,12 +153,12 @@ public class OverallTimerTobPlugin extends Plugin
 		NPC npc = event.getNpc();
 		if (npc.getId() == 8375 && inTob && !raidComplete)
 		{
-			log.info("Verzik P3 despawned — TOB complete");
+			log.debug("Verzik P3 despawned — TOB complete");
 			raidComplete = true;
 		}
 		if (npc.getId() == 10836 && inTob && !raidComplete) // this if statement is for entry mode (debugging)
 		{
-			log.info("Verzik P3 despawned — TOB complete");
+			log.debug("Verzik P3 despawned — TOB complete");
 			raidComplete = true;
 		}
 	}
@@ -169,7 +170,7 @@ public class OverallTimerTobPlugin extends Plugin
 
 	private void reset()
 	{
-		//log.info("Resetting TOB timer state");
+		//log.debug("Resetting TOB timer state");
 		inTob = false;
 		raidComplete = false;
 		startTime = -1;
